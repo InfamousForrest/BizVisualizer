@@ -1,6 +1,8 @@
 from widgets.ToggleGrid import ToggleGrid
 from widgets.GraphWindow import GraphBox
-from RecorderScreen import *
+from RecorderScreen import MainScreen
+from helpers.GlobalEnums import GraphStyles, TimeFrames, DataPresentation
+from helpers.DataCollections import data_store
 from kivy.app import App
 from kivy.uix.spinner import Spinner
 from kivy.uix.boxlayout import BoxLayout

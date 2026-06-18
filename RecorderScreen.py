@@ -1,4 +1,4 @@
-from helpers.GlobalEnums import *
+from helpers.GlobalEnums import AktionName
 from helpers.DataCollections import data_store
 from kivy.app import App
 from kivy.uix.spinner import Spinner

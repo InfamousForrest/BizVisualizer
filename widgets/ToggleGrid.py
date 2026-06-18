@@ -1,5 +1,5 @@
 from widgets.LabeledToggle import LabeledToggle
-from helpers.GlobalEnums import *
+from helpers.GlobalEnums import AktionName
 from kivy.uix.gridlayout import GridLayout
 
 

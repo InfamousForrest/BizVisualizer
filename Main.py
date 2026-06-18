@@ -1,8 +1,8 @@
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
-from RecorderScreen import *
-from VisualizerScreen import *
+from RecorderScreen import MainScreen
+from VisualizerScreen import GraphScreen
 
 
 class MainTabs(TabbedPanel):

@@ -1,4 +1,5 @@
-from helpers.DataCollections import *
+from helpers.DataCollections import data_store, DataPoint
+from helpers.GlobalEnums import AktionName, GraphStyles
 from collections import Counter
 from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics import Color, Rectangle, Line
