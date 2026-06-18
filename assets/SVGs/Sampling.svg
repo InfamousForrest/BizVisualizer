@@ -1,0 +1,33 @@
+<svg class="product-sampling-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="productSamplingTitle">
+  <title id="productSamplingTitle">Product Sampling</title>
+
+  <g fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- bottle -->
+    <g transform="rotate(32 158 84)">
+      <!-- cap -->
+      <rect x="150" y="22" width="24" height="16" rx="4"></rect>
+      <!-- neck -->
+      <rect x="144" y="38" width="36" height="24" rx="6"></rect>
+      <!-- body -->
+      <rect x="132" y="62" width="56" height="86" rx="12"></rect>
+      <!-- label bands -->
+      <path d="M139 84h42"></path>
+      <path d="M139 104h42"></path>
+    </g>
+
+    <!-- motion marks -->
+    <path d="M92 83h16"></path>
+    <path d="M109 52l14 9"></path>
+    <path d="M132 32l6 16"></path>
+    <path d="M206 94h16"></path>
+    <path d="M198 117l15 8"></path>
+    <path d="M176 134l7 16"></path>
+
+    <!-- cuff -->
+    <path d="M32 185l18-10 20 37-18 10Z"></path>
+
+    <!-- hand -->
+    <path d="M52 178l29-16 43 11c8 2 12 8 10 14s-8 9-15 8l-24-5"></path>
+    <path d="M119 195l52-29c7-4 15-1 18 6s1 14-6 18l-48 27c-9 5-18 6-28 3l-33-11"></path>
+  </g>
+</svg>

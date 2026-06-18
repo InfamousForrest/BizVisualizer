@@ -1,0 +1,7 @@
+<svg class="thumbs-down-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-labelledby="thumbsDownTitle">
+  <title id="thumbsDownTitle">Thumbs Down</title>
+
+  <path d="M10 3H6a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4V3Z" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+
+  <path d="M10 13l3 7c.2.6.8 1 1.4 1H15a2 2 0 0 0 2-2v-4h2.2a1.8 1.8 0 0 0 1.8-2.2l-1.1-6A2 2 0 0 0 18 5h-8" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+</svg>
