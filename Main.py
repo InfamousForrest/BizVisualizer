@@ -1,7 +1,7 @@
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
-from RecorderScreen import MainScreen
+from RecorderScreen import RecScreen
 from VisualizerScreen import GraphScreen
 
 
@@ -14,7 +14,7 @@ class MainTabs(TabbedPanel):
         self.tab_pos = "top_mid"
 
         self.record_tab = TabbedPanelItem(text="Record")
-        self.record_tab.add_widget(MainScreen())
+        self.record_tab.add_widget(RecScreen())
 
         self.graph_tab = TabbedPanelItem(text="Graphs")
         self.graph_tab.add_widget(GraphScreen())

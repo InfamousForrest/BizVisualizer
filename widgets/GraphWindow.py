@@ -39,7 +39,7 @@ class GraphBox(BoxLayout):
             self.height
         )
 
-    def set_data(self, data_points, graph_type):
+    def plot_data(self, data_points, graph_type):
         self.graph_points = data_points
         self.selected_graph_style = graph_type
         self.redraw_graph()

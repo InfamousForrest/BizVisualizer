@@ -1,6 +1,6 @@
 from widgets.ToggleGrid import ToggleGrid
 from widgets.GraphWindow import GraphBox
-from RecorderScreen import MainScreen
+from RecorderScreen import RecScreen
 from helpers.GlobalEnums import GraphStyles, TimeFrames, DataPresentation
 from helpers.DataCollections import data_store
 from kivy.app import App
@@ -65,7 +65,7 @@ class GraphScreen(BoxLayout):
         active_aktions = self.toggle_grid.get_active_aktions()
         presentation = self.get_selected_presentation()
         visible_points = data_store.get_points_for_aktions(active_aktions, presentation)
-        self.graph_box.set_data(visible_points, self.selected_graph_style)
+        self.graph_box.plot_data(visible_points, self.selected_graph_style)
 
     def get_selected_graph_type(self) -> GraphStyles:
         return GraphStyles(self.graph_type_dropdown.text)
