@@ -1,8 +1,8 @@
 from widgets.ToggleGrid import ToggleGrid
 from widgets.GraphWindow import GraphBox
 from RecorderScreen import RecScreen
-from helpers.GlobalEnums import GraphStyles, TimeFrames, DataPresentation
-from helpers.DataCollections import data_store
+from helpers.GlobalEnums import GraphStyles, TimeFrames, DataPresentation, AktionName
+from helpers.DataCollections import data_store, DataPoint
 from kivy.app import App
 from kivy.uix.spinner import Spinner
 from kivy.uix.boxlayout import BoxLayout
@@ -12,7 +12,7 @@ class GraphScreen(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(orientation="vertical", padding=20, spacing=10, **kwargs)
 
-        self.selected_aktions = {}
+        self.current_graph: dict[tuple[AktionName, bool | None], list[DataPoint]] = {}
 
         self.dropdown_row = BoxLayout(
             orientation="horizontal",
@@ -59,7 +59,7 @@ class GraphScreen(BoxLayout):
         self.add_widget(self.graph_box)
 
         self.graph_type_dropdown.bind(text=lambda *_: self.on_graph_style_changed())
-        self.timeframe_dropdown.bind(text=lambda *_: self.timeframe_dropdown())
+        self.timeframe_dropdown.bind(text=lambda *_: self.on_timeframe_changed())
 
     def refresh_graph(self):
         active_aktions = self.toggle_grid.get_active_aktions()
@@ -71,21 +71,21 @@ class GraphScreen(BoxLayout):
         return GraphStyles(self.graph_type_dropdown.text)
 
     def on_graph_style_changed(self):
-        self.selected_graph_style = self.get_selected_graph_type()
+        App.get_running_app().AppState.selected_graph_style = self.get_selected_graph_type()
         self.refresh_graph()
 
     def get_selected_timeframe(self) -> TimeFrames:
         return TimeFrames(self.timeframe_dropdown.text)
 
     def on_timeframe_changed(self):
-        self.selected_timeframe = self.get_selected_timeframe()
+        App.get_running_app().AppState.selected_timeframe = self.get_selected_timeframe()
         self.refresh_graph()
 
     def get_selected_presentation(self) -> DataPresentation:
         return DataPresentation(self.presentation_dropdown.text)
 
     def on_graph_presentation(self):
-        self.selected_presentation = self.get_selected_presentation()
+        App.get_running_app().AppState.selected_presentation = self.get_selected_presentation()
         self.refresh_graph()
 
 

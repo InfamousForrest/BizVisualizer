@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d9e61cf-0d1f-4032-901c-30e2a9587a9b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/helpers/SaveLoad.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RecorderScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/RecorderScreen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VisualizerScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/VisualizerScreen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/GraphWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/GraphWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/DataCollections.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/DataCollections.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/SaveLoad.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/SaveLoad.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,12 +33,15 @@
     &quot;assignee&quot;: &quot;InfamousForrest&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/InfamousForrest/BizVisualizer.git",
-    "accountId": "64a116d4-742f-404a-8f8c-3dbfa11f7a7b"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/InfamousForrest/BizVisualizer.git&quot;,
+    &quot;accountId&quot;: &quot;64a116d4-742f-404a-8f8c-3dbfa11f7a7b&quot;
   }
-}]]></component>
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
@@ -59,6 +62,7 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   }
@@ -78,7 +82,9 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -92,7 +98,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-337b0a7a993a-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.19416.19" />
+        <option value="bundled-python-sdk-c59985aa861c-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.24374.152" />
       </set>
     </attachedChunks>
   </component>
@@ -105,6 +111,8 @@
       <option name="presentableId" value="Default" />
       <updated>1781807128690</updated>
       <workItem from="1781807130198" duration="2417000" />
+      <workItem from="1781907462950" duration="17493000" />
+      <workItem from="1782075852757" duration="16788000" />
     </task>
     <servers />
   </component>
@@ -112,6 +120,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/BizVisualizer$Main.coverage" NAME="Main Coverage Results" MODIFIED="1781809276736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/BizVisualizer$Main.coverage" NAME="Main Coverage Results" MODIFIED="1782096675360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

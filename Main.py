@@ -1,8 +1,10 @@
 from kivy.app import App
+from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from RecorderScreen import RecScreen
 from VisualizerScreen import GraphScreen
+from helpers.SaveLoad import AppState
 
 
 class MainTabs(TabbedPanel):
@@ -38,7 +40,33 @@ class MainTabs(TabbedPanel):
 
 class MyApp(App):
     def build(self):
+        self.app_state = AppState()
+        Window.bind(on_keyboard=self.on_keyboard)
         return MainTabs()
 
+    def on_stop(self):
+        self.app_state.save()
+        return False
+
+    def on_start(self):
+        self.app_state.load()
+
+    def on_quit(self):
+        self.app_state.save()
+        return False
+
+    def on_close(self):
+        self.app_state.save()
+        return False
+
+    def on_pause(self):
+        self.app_state.save()
+        return True
+
+    def on_keyboard(self, window, key, *args):
+        if key == 27:
+            self.app_state.save()
+            return False
+        return True
 
 MyApp().run()

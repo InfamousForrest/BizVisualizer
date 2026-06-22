@@ -37,6 +37,9 @@ class DataStore:
     def __init__(self):
         self.data_points: dict[AktionName, GraphSet] = {}
 
+    def add_point(self, point: DataPoint):
+        self.data_points[point.aktion_name].add_point(point)
+
     def add_point(self, aktion_name: AktionName, said_yes: bool, candidate_name: str):
         self.data_points[aktion_name].add_point(
             DataPoint(

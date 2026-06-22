@@ -1,5 +1,5 @@
 from helpers.GlobalEnums import AktionName
-from helpers.DataCollections import DataPoint
+from helpers.DataCollections import DataPoint, data_store
 from kivy.app import App
 from kivy.uix.spinner import Spinner
 from kivy.uix.boxlayout import BoxLayout
@@ -36,8 +36,9 @@ class RecScreen(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(orientation="vertical", padding=20, spacing=10, **kwargs)
 
+        self.app_state = App.get_running_app().app_state
+
         self.new_data: list[DataPoint] = []
-        self.selected_action = AktionName.QI1
         self.yes_or_no = True
         self.yes_image = "assets/PNGs/ThumbsUp.png"
         self.no_image = "assets/PNGs/ThumbsDown.png"
@@ -65,9 +66,11 @@ class RecScreen(BoxLayout):
             size_hint=(1, 1),
         )
 
+        icon, color = self.get_nbutton_icons()
+
         self.no_button = ImageButton(
-            image_source=self.get_nbutton_icons(),
-            button_color=(0.7, 0.1, 0.2, 1),
+            image_source=icon,
+            button_color=color,
             size_hint=(1, 1),
         )
 
@@ -95,7 +98,7 @@ class RecScreen(BoxLayout):
         )
 
         self.action_dropdown = Spinner(
-            text=AktionName.QI1.label,
+            text=self.app_state.selected_aktion_name.label,
             values=[action.label for action in AktionName],
             font_size=28,
             size_hint_y=None,
@@ -125,37 +128,32 @@ class RecScreen(BoxLayout):
         self.add_widget(self.button_row2)
 
     def get_ybutton_icons(self):
-        if self.selected_action == AktionName.CUSTOMER_ACQUISITION:
+        if self.app_state.selected_aktion_name == AktionName.CUSTOMER_ACQUISITION:
             return self.sales_image
 
         return self.yes_image
 
     def get_nbutton_icons(self):
-        if self.selected_action == AktionName.CUSTOMER_ACQUISITION:
-            return self.sampling_image
+        if self.app_state.selected_aktion_name == AktionName.CUSTOMER_ACQUISITION:
+            return self.sampling_image, (0.1, 0.8, 0.7, 1)
 
-        return self.no_image
+        return self.no_image, (0.8, 0.1, 0.1, 1)
 
     def update_buttons(self):
         self.yes_button.icon.source = self.get_ybutton_icons()
-        self.no_button.icon.source = self.get_nbutton_icons()
-        ca = (0.8, 0.1, 0.1, 1)
-        cb = (0.1, 0.8, 0.7, 1)
+        icon, color = self.get_nbutton_icons()
+        self.no_button.icon.source = icon
 
         self.yes_button.icon.reload()
         self.no_button.icon.reload()
 
         self.yes_button.background_color = (0.1, 0.7, 0.2, 1)
-
-        if self.selected_action == AktionName.CUSTOMER_ACQUISITION:
-            self.no_button.background_color = cb
-        else:
-            self.no_button.background_color = ca
+        self.no_button.background_color = color
 
     def record_data(self, answer):
         self.new_data.append(
             DataPoint(
-                aktion_name=self.selected_action,
+                aktion_name=self.app_state.selected_aktion_name,
                 said_yes=answer,
                 candidate_name=self.name_input.text.strip().replace(",", ""),
                 timestamp=datetime.utcnow()
@@ -176,7 +174,7 @@ class RecScreen(BoxLayout):
             self.output.text += "\n" + line
 
     def on_action_changed(self, spinner, selected_text):
-        self.selected_action = next(
+        self.app_state.selected_aktion_name = next(
             action for action in AktionName
             if action.label == selected_text
         )
@@ -191,6 +189,10 @@ class RecScreen(BoxLayout):
     def clear_new_data(self, instance):
         self.new_data.clear()
         self.display_records()
+
+    def commit_data(self):
+        for point in self.new_data:
+            data_store.add_point(point)
 
 
 class TrackerApp(App):
