@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d9e61cf-0d1f-4032-901c-30e2a9587a9b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/BizVisualizer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BizVisualizer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecorderScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/RecorderScreen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisualizerScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/VisualizerScreen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildozer.spec" beforeDir="false" afterPath="$PROJECT_DIR$/buildozer.spec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/DataCollections.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/DataCollections.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/DateTimeObtainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/DateTimeObtainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/SaveLoad.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/SaveLoad.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/GraphWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/GraphWindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/LabeledToggle.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/LabeledToggle.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/ToggleGrid.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/ToggleGrid.py" afterDir="false" />
-    </list>
+    <list default="true" id="6d9e61cf-0d1f-4032-901c-30e2a9587a9b" name="Changes" comment="DT: Supposedly finished project placed into a different directory that has no spaces in it's file path" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -121,10 +107,23 @@
       <workItem from="1781907462950" duration="17493000" />
       <workItem from="1782075852757" duration="16788000" />
     </task>
+    <task id="LOCAL-00001" summary="DT: Supposedly finished project placed into a different directory that has no spaces in it's file path">
+      <option name="closed" value="true" />
+      <created>1782284406232</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1782284406232</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="DT: Supposedly finished project placed into a different directory that has no spaces in it's file path" />
+    <option name="LAST_COMMIT_MESSAGE" value="DT: Supposedly finished project placed into a different directory that has no spaces in it's file path" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/BizVisualizer$Main.coverage" NAME="Main Coverage Results" MODIFIED="1782096675360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
