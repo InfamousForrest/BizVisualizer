@@ -2,69 +2,64 @@ import csv
 import json
 from datetime import datetime
 from pathlib import Path
-from kivy.app import App
-
-from fontTools.diff import file_exists
-from pip._internal.models import candidate
-from pygments.styles import default
-
-from helpers.DataCollections import GraphSet, DataPoint, data_store, DataStore
+from helpers.DataCollections import DataPoint, data_store
 from helpers.GlobalEnums import AktionName, GraphStyles, TimeFrames, DataPresentation
 
 
 class SaveLoad:
-        csv_path = Path("data_points.csv")
-        fieldNames = [
-            "aktion_name",
-            "said_yes",
-            "candidate_name",
-            "timestamp",
-        ]
+    csv_path = Path("data_points.csv")
+    fieldNames = [
+        "aktion_name",
+        "said_yes",
+        "candidate_name",
+        "dptimestamp",
+    ]
 
-        def verify_file(cls) -> bool:
-            if not cls.csv_path.exists():
-                with cls.csv_path.open("w", newline="", encoding="utf-8") as csvfile:
-                    writer = csv.writer(csvfile)
-                    writer.writerow(cls.fieldNames)
-                return False
-            return True
-
-        @classmethod
-        def load_all_data(cls):
-            if not cls.verify_file():
-                return
-
-            data_store.data_points.clear()
-
-            with cls.csv_path.open("r", encoding="utf-8") as csvfile:
-                reader = csv.DictReader(csvfile)
-
-                for row in reader:
-                    aktion_name = AktionName[row["aktion_name"]]
-
-                    point = DataPoint(
-                        aktion_name=aktion_name,
-                        said_yes=row["said_yes"] == "True",
-                        candidate_name=row["candidate_name"],
-                        timestamp=datetime.fromisoformat(row["timestamp"]),
-                    )
-
-                    data_store.add_point(point)
-
-
-        @classmethod
-        def save_new_data(cls, new_stuff: list[DataPoint]):
-            cls.verify_file()
-            with cls.csv_path.open("a", encoding="utf-8") as csvfile:
+    @classmethod
+    def verify_file(cls) -> bool:
+        if not cls.csv_path.exists():
+            with cls.csv_path.open("w", newline="", encoding="utf-8") as csvfile:
                 writer = csv.writer(csvfile)
+                writer.writerow(cls.fieldNames)
+            return False
+        return True
 
-                for point in new_stuff:
-                    writer.writerow([
-                        point.aktion_name.name,
-                        point.said_yes,
-                        point.candidate_name,
-                        point.timestamp.isoformat(),
-                    ])
+    @classmethod
+    def load_all_data(cls):
+        if not cls.verify_file():
+            return
+
+        data_store.data_points.clear()
+
+        with cls.csv_path.open("r", newline="", encoding="utf-8") as csvfile:
+            reader = csv.DictReader(csvfile)
+
+            for row in reader:
+                aktion_name = AktionName[row["aktion_name"]]
+                print(row)
+                point = DataPoint(
+                    aktion_name=aktion_name,
+                    said_yes=row["said_yes"] == "True",
+                    candidate_name=row["candidate_name"],
+                    dptimestamp=datetime.fromisoformat(row["dptimestamp"]),
+                )
+
+                data_store.add_point(point)
+
+
+    @classmethod
+    def save_new_data(cls, new_stuff: list[DataPoint]):
+        cls.verify_file()
+        with cls.csv_path.open("a", newline="", encoding="utf-8") as csvfile:
+            writer = csv.writer(csvfile)
+
+            for point in new_stuff:
+                writer.writerow([
+                    point.aktion_name.name,
+                    point.said_yes,
+                    point.candidate_name,
+                    point.dptimestamp.isoformat(),
+                ])
 
 
 class AppState:

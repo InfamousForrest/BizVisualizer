@@ -1,10 +1,11 @@
+from typing import Callable
 from widgets.LabeledToggle import LabeledToggle
 from helpers.GlobalEnums import AktionName
 from kivy.uix.gridlayout import GridLayout
 
 
 class ToggleGrid(GridLayout):
-    def __init__(self, on_change=None, **kwargs):
+    def __init__(self, on_change: Callable[[bool], None] | None = None, **kwargs):
         super().__init__(**kwargs)
 
         self.cols = 3

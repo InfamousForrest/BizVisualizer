@@ -1,0 +1,15 @@
+{
+    "selected_aktion_name": "MPA_PHONE",
+    "selected_aktion_toggles": {
+        "CUSTOMER_ACQUISITION": false,
+        "MPA_INPERSON": false,
+        "MPA_PHONE": false,
+        "DTM_INPERSON": false,
+        "DTM_PHONE": false,
+        "QUALIFYINGCALL": false,
+        "QI1": false
+    },
+    "selected_graph_style": "Line",
+    "selected_timeframe": "Years",
+    "selected_presentation": "Both_Together"
+}

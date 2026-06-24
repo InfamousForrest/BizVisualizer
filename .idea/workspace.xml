@@ -5,12 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d9e61cf-0d1f-4032-901c-30e2a9587a9b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/BizVisualizer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BizVisualizer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RecorderScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/RecorderScreen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VisualizerScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/VisualizerScreen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildozer.spec" beforeDir="false" afterPath="$PROJECT_DIR$/buildozer.spec" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers/DataCollections.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/DataCollections.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/DateTimeObtainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/DateTimeObtainer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers/SaveLoad.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/SaveLoad.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/GraphWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/GraphWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/LabeledToggle.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/LabeledToggle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/ToggleGrid.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/ToggleGrid.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +62,7 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.Main.executor": "Run",
+    "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -62,13 +70,14 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/A_Programming_Projects/Python_Projects/BizVisualizer/main.py",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="BizVisualizer" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -77,15 +86,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12 (BizVisualizer)" />
+      <option name="SDK_NAME" value="Python 3.12" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -98,7 +105,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-c59985aa861c-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.24374.152" />
+        <option value="bundled-python-sdk-337b0a7a993a-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.19416.19" />
       </set>
     </attachedChunks>
   </component>

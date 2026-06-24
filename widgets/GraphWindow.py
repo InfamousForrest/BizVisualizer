@@ -1,9 +1,12 @@
-from helpers.DataCollections import data_store, DataPoint
-from helpers.GlobalEnums import AktionName, GraphStyles
-from collections import Counter
+import numpy as np
+from kivy.app import App
+from datetime import datetime
+from matplotlib import pyplot as plt
+from helpers.DataCollections import DataPoint
+from helpers.GlobalEnums import AktionName, GraphStyles, TimeFrames, DataPresentation
+from collections import defaultdict
 from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics import Color, Rectangle, Line
-from matplotlib.figure import Figure
 from kivy_garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 
 
@@ -28,6 +31,47 @@ class GraphBox(BoxLayout):
 
         self.bind(pos=self._update_canvas, size=self._update_canvas)
 
+    def get_time_bucket(self, timestamp: datetime):
+        time_frame = App.get_running_app().app_state.selected_timeframe
+
+        if time_frame == TimeFrames.Days:
+            return timestamp.date()
+
+        elif time_frame == TimeFrames.Weeks:
+            year, week, day = timestamp.isocalendar()
+            return f"{year}-w{week:02d}"
+
+        elif time_frame == TimeFrames.Months:
+            return timestamp.strftime("%y-%m")
+
+        elif time_frame == TimeFrames.Years:
+            return timestamp.year
+
+        else:
+            return timestamp.now()
+
+    def build_timeframe_activity_counts(self):
+        presentation = App.get_running_app().app_state.selected_presentation
+        separate = presentation == DataPresentation.Both_Separate
+
+        if separate:
+            counts = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+        else:
+            counts = defaultdict(lambda: defaultdict(int))
+
+        for graph_key, points in self.graph_points.items():
+            aktion, yes_no = graph_key
+
+            for point in points:
+                bucket = self.get_time_bucket(point.dptimestamp)
+
+                if separate:
+                    counts[bucket][aktion][point.said_yes] += 1
+                else:
+                    counts[bucket][aktion] += 1
+
+        return counts
+
     def _update_canvas(self, *args):
         self.bg_rect.pos = self.pos
         self.bg_rect.size = self.size
@@ -39,65 +83,88 @@ class GraphBox(BoxLayout):
             self.height
         )
 
-    def plot_data(self, data_points, graph_type):
-        self.graph_points = data_points
-        self.selected_graph_style = graph_type
-        self.redraw_graph()
-
-    def redraw_graph(self):
+    def plot_data(self, graph_points:  dict[tuple[AktionName, bool | None], list[DataPoint]]):
+        self.graph_points = graph_points
         self.clear_widgets()
 
         if not self.graph_points:
             return
 
-        if self.selected_graph_style == GraphStyles.Bar:
-            self.draw_bar_graph()
+        counts = self.build_timeframe_activity_counts()
+        self.draw_graph(counts)
 
-        elif self.selected_graph_style == GraphStyles.Line:
-            self.draw_line_graph()
+    def get_all_aktions_from_counts(self, counts):
+        aktions = set()
 
-    def draw_bar_graph(self):
-        counts = Counter(
-            point.aktion_name.name
-            for point in self.graph_points
-        )
+        for activity_counts in counts.values():
+            for aktion in activity_counts.keys():
+                aktions.add(aktion)
 
-        fig = Figure()
-        ax = fig.add_subplot(111)
+        return sorted(aktions, key=lambda a: a.name)
 
-        names = list(counts.keys())
-        values = list(counts.values())
+    def draw_graph(self, counts):
+        app_state = App.get_running_app().app_state
+        presentation = app_state.selected_presentation
+        graph_style = app_state.selected_graph_style
+        separate = presentation == DataPresentation.Both_Separate
 
-        ax.bar(names, values)
-        ax.set_title("Actions Recorded")
+        fig, ax = plt.subplots()
+        aktions = self.get_all_aktions_from_counts(counts)
+        buckets = sorted(counts.keys())
+        x_positions = np.arange(len(buckets))
+
+        if separate:
+            for i, aktion in enumerate(aktions):
+                yes_values = []
+                no_values = []
+
+                for bucket in buckets:
+                    yes_values.append(counts[bucket][aktion].get(True, 0))
+                    no_values.append(counts[bucket][aktion].get(False, 0))
+
+                if graph_style == GraphStyles.Line:
+                    ax.plot(buckets, yes_values, marker="o", label=f"{aktion.name} Yes")
+                    ax.plot(buckets, no_values, marker="o", label=f"{aktion.name} No")
+
+                elif graph_style == GraphStyles.Bar:
+                    bar_width = 0.8 / len(aktions)
+                    offset = (i - len(aktions) / 2) * bar_width + bar_width / 2
+                    bar_x = x_positions + offset
+
+                    ax.bar(bar_x, no_values, label=f"{aktion.name} No")
+                    ax.bar(bar_x, yes_values, bottom=no_values, label=f"{aktion.name} Yes")
+
+            if graph_style == GraphStyles.Bar:
+                ax.set_xticks(x_positions)
+                ax.set_xticklabels(buckets)
+
+        else:
+            for i, aktion in enumerate(aktions):
+                values = []
+
+                for bucket in buckets:
+                    values.append(counts[bucket].get(aktion, 0))
+
+                if graph_style == GraphStyles.Line:
+                    ax.plot(buckets, values, marker="o", label=aktion.name)
+
+                elif graph_style == GraphStyles.Bar:
+                    bar_width = 0.8 / len(aktions)
+                    offset = (i - len(aktions) / 2) * bar_width + bar_width / 2
+                    bar_x = x_positions + offset
+
+                    ax.bar(bar_x, values, width=bar_width, label=aktion.name)
+
+            if graph_style == GraphStyles.Bar:
+                ax.set_xticks(x_positions)
+                ax.set_xticklabels(buckets)
+
+        ax.set_title("Activity Counts Over Time")
+        ax.set_xlabel("Time")
         ax.set_ylabel("Count")
-        ax.tick_params(axis="x", rotation=30)
+        ax.legend()
+        ax.grid(True)
 
-        #fig.tight_layout()
-        fig.subplots_adjust(bottom=0.25)
+        fig.autofmt_xdate()
 
-        self.canvas_widget = FigureCanvasKivyAgg(fig)
-        self.add_widget(self.canvas_widget)
-
-    def draw_line_graph(self):
-        counts = Counter(
-            point.timestamp.strftime("%Y-%m-%d")
-            for point in self.data_points
-        )
-
-        dates = sorted(counts.keys())
-        values = [counts[date] for date in dates]
-
-        fig = Figure()
-        ax = fig.add_subplot(111)
-
-        ax.plot(dates, values, marker="o")
-        ax.set_title("Actions Over Time")
-        ax.set_ylabel("Count")
-        ax.tick_params(axis="x", rotation=30)
-
-        #fig.tight_layout()
-        fig.subplots_adjust(bottom=0.25)
-
-        self.canvas_widget = FigureCanvasKivyAgg(fig)
-        self.add_widget(self.canvas_widget)
+        self.add_widget(FigureCanvasKivyAgg(fig))

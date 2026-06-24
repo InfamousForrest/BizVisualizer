@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from datetime import datetime
-from enum import Enum
 from helpers.GlobalEnums import AktionName, DataPresentation
 
 
@@ -9,7 +8,7 @@ class DataPoint:
     aktion_name: AktionName
     said_yes: bool
     candidate_name: str
-    timestamp: datetime
+    dptimestamp: datetime
 
 
 class GraphSet:
@@ -35,22 +34,25 @@ class GraphSet:
 
 class DataStore:
     def __init__(self):
-        self.data_points: dict[AktionName, GraphSet] = {}
+        self.data_points: dict[AktionName, GraphSet] = {
+            aktion: GraphSet()
+            for aktion in AktionName
+        }
+
+    def add_points(self, points: list[DataPoint]):
+        for point in points:
+            self.data_points[point.aktion_name].add_point(point)
 
     def add_point(self, point: DataPoint):
+        if not self.data_points:
+            data_store.data_points = {
+                aktion: GraphSet()
+                for aktion in AktionName
+            }
+
         self.data_points[point.aktion_name].add_point(point)
 
-    def add_point(self, aktion_name: AktionName, said_yes: bool, candidate_name: str):
-        self.data_points[aktion_name].add_point(
-            DataPoint(
-                aktion_name=aktion_name,
-                said_yes=said_yes,
-                candidate_name=candidate_name,
-                timestamp=datetime.now(),
-            )
-        )
-
-    def get_points_for_aktions(self, aktions, presentation: DataPresentation):
+    def get_points_for_aktions(self, aktions: list[AktionName], presentation: DataPresentation):
         points: dict[tuple[AktionName, bool | None], list[DataPoint]] = {}
         for aktion in aktions:
             if presentation == DataPresentation.Positives:
@@ -66,7 +68,12 @@ class DataStore:
         return points
 
     def get_all_points(self):
-        return self.data_points
+        points: dict[AktionName, list[DataPoint]] = {}
+
+        for key in self.data_points.keys():
+            points[key] = self.data_points[key].get_all_points()
+
+        return points
 
 
 data_store = DataStore()

@@ -7,6 +7,7 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from datetime import datetime
 from kivy.uix.image import Image
+from helpers.SaveLoad import SaveLoad
 
 
 class ImageButton(Button):
@@ -37,6 +38,7 @@ class RecScreen(BoxLayout):
         super().__init__(orientation="vertical", padding=20, spacing=10, **kwargs)
 
         self.app_state = App.get_running_app().app_state
+        self.saveload = SaveLoad
 
         self.new_data: list[DataPoint] = []
         self.yes_or_no = True
@@ -156,7 +158,7 @@ class RecScreen(BoxLayout):
                 aktion_name=self.app_state.selected_aktion_name,
                 said_yes=answer,
                 candidate_name=self.name_input.text.strip().replace(",", ""),
-                timestamp=datetime.utcnow()
+                dptimestamp=datetime.utcnow()
             )
         )
 
@@ -166,11 +168,11 @@ class RecScreen(BoxLayout):
     def display_records(self):
         self.output.text = ""
 
-        if not self.new_data:
+        if len(self.new_data) == 0:
             return
-
+        print(len(self.new_data))
         for data in self.new_data:
-            line = f"{data.candidate_name},{data.aktion_name.label},{data.said_yes},{data.timestamp.isoformat()}\n"
+            line = f"{data.candidate_name},{data.aktion_name.label},{data.said_yes},{data.dptimestamp.isoformat()}\n"
             self.output.text += "\n" + line
 
     def on_action_changed(self, spinner, selected_text):
@@ -182,17 +184,20 @@ class RecScreen(BoxLayout):
         self.update_buttons()
 
     def delete_last_point(self, instance):
-        if self.new_data:
+        if len(self.new_data) > 0:
             self.new_data.pop()
             self.display_records()
 
     def clear_new_data(self, instance):
-        self.new_data.clear()
-        self.display_records()
+        if len(self.new_data) > 0:
+            self.new_data.clear()
+            self.display_records()
 
     def commit_data(self):
-        for point in self.new_data:
-            data_store.add_point(point)
+        print(len(self.new_data))
+        data_store.add_points(self.new_data)
+        self.saveload.save_new_data(self.new_data)
+        self.clear_new_data(instance=self)
 
 
 class TrackerApp(App):

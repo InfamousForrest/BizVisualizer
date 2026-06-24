@@ -1,10 +1,11 @@
+from typing import Callable
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.label import Label
 
 
 class LabeledToggle(BoxLayout):
-    def __init__(self, aktion_name, active_color, on_change=None, **kwargs):
+    def __init__(self, aktion_name, active_color, on_change: Callable[[bool], None] | None = None, **kwargs):
         super().__init__(**kwargs)
 
         self.aktion_name = aktion_name
@@ -35,7 +36,7 @@ class LabeledToggle(BoxLayout):
         self.add_widget(self.checkbox)
         self.add_widget(self.label)
 
-        self.checkbox.bind(active=self._on_checkbox_changed)
+        self.checkbox.bind(active=self.on_checkbox_changed)
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
@@ -44,11 +45,11 @@ class LabeledToggle(BoxLayout):
 
         return super().on_touch_down(touch)
 
-    def _on_checkbox_changed(self, checkbox, active):
+    def on_checkbox_changed(self, checkbox, active):
         self.refresh_visual_state()
 
         if self.on_change:
-            self.on_change(self.aktion_name, active)
+            self.on_change(active)
 
     def refresh_visual_state(self):
         self.label.color = (
@@ -62,5 +63,8 @@ class LabeledToggle(BoxLayout):
         return self.checkbox.active
 
     def set_active(self, value: bool):
+        if self.checkbox.active == value:
+            return
+
         self.checkbox.active = value
         self.refresh_visual_state()
